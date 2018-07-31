@@ -3,12 +3,24 @@ from consts import *
 
 
 class Game(object):
-    def __init__(self, length=GAME_LENGTH):
+    def __init__(self, length=GAME_LENGTH, level='easy'):
         self.length = length
         self.initial_state = self.new_game
         self.turns = 0
-        self.max_turns = 4
+        self.difficulty = level
+        self.max_turns = self.level_control()
         print(self.initial_state)
+
+    def level_control(self):
+        if self.difficulty == 'easy':
+            return 10
+        elif self.difficulty == 'medium':
+            return 8
+        elif self.difficulty == 'hard':
+            return 5
+        # unacceptable value taken as default
+        else:
+            return 10
 
     @property
     def new_game(self):
